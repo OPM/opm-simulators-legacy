@@ -1,5 +1,5 @@
 /*
-  Copyright 2012 SINTEF ICT, Applied Mathematics.
+  Copyright 2010, 2011, 2012 SINTEF ICT, Applied Mathematics.
 
   This file is part of the Open Porous Media project (OPM).
 
@@ -17,29 +17,19 @@
   along with OPM.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "config.h"
-#include <opm/core/linalg/LinearSolverInterface.hpp>
-#include <opm/core/linalg/sparse_sys.h>
-#include <opm/core/linalg/call_umfpack.h>
+#include <opm/core/props/satfunc/SaturationPropsFromDeck.hpp>
+#include <opm/core/grid.h>
+#include <opm/core/utility/buildUniformMonotoneTable.hpp>
+#include <opm/core/utility/ErrorMacros.hpp>
+#include <iostream>
 
 namespace Opm
 {
 
-    LinearSolverInterface::~LinearSolverInterface()
-    {
-    }
-
-
-
-
-    LinearSolverInterface::LinearSolverReport
-    LinearSolverInterface::solve(const CSRMatrix* A,
-                                 const double* rhs,
-                                 double* solution) const
-    {
-        return solve(A->m, A->nnz, A->ia, A->ja, A->sa, rhs, solution);
-    }
+    // This file should be removed in the future.
+    // Holding off until refactoring of SaturationPropsFromDeck class is done.
 
 } // namespace Opm
+
 
