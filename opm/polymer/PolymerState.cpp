@@ -17,30 +17,26 @@
   along with OPM.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OPM_POLYMERSTATE_HEADER_INCLUDED
-#define OPM_POLYMERSTATE_HEADER_INCLUDED
 
 #include <opm/common/data/SimulationDataContainer.hpp>
 
-#include <opm/core/grid.h>
-#include <vector>
+#include <opm/polymer/PolymerState.hpp>
 
 namespace Opm
 {
+    const std::string PolymerState::CONCENTRATION = "CONCENTRATION";
+    const std::string PolymerState::CMAX = "CMAX";
 
-    /// Simulator state for a two-phase simulator with polymer.
-    class PolymerState : public SimulationDataContainer
+    PolymerState::PolymerState(int number_of_cells, int number_of_faces, int num_phases) :
+        SimulationDataContainer( number_of_cells , number_of_faces , num_phases )
     {
-    public:
-        static const std::string CONCENTRATION;
-        static const std::string CMAX;
+        registerCellData(CONCENTRATION , 1 , 0 );
+        registerCellData(CMAX , 1 , 0 );
+    }
 
-        PolymerState(int number_of_cells, int number_of_faces, int num_phases);
-    };
 
 } // namespace Opm
 
 
 
 
-#endif // OPM_POLYMERSTATE_HEADER_INCLUDED
