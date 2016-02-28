@@ -17,31 +17,26 @@
   along with OPM.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OPM_POLYMERBLACKOILSTATE_HEADER_INCLUDED
-#define OPM_POLYMERBLACKOILSTATE_HEADER_INCLUDED
 
+#include <opm/common/data/SimulationDataContainer.hpp>
 
-#include <opm/core/simulator/BlackoilState.hpp>
-#include <opm/core/grid.h>
-#include <vector>
+#include <opm/polymer/PolymerBlackoilState.hpp>
 
 namespace Opm
 {
+    const std::string PolymerBlackoilState::CONCENTRATION = "CONCENTRATION";
+    const std::string PolymerBlackoilState::CMAX = "CMAX";
 
-    /// Simulator state for a compressible two-phase simulator with polymer.
-    /// We use the Blackoil state parameters.
-    class PolymerBlackoilState : public BlackoilState
+    PolymerBlackoilState::PolymerBlackoilState(int number_of_cells, int number_of_faces, int num_phases) :
+        BlackoilState( number_of_cells , number_of_faces, num_phases)
     {
-    public:
-        static const std::string CONCENTRATION;
-        static const std::string CMAX;
+        registerCellData(CONCENTRATION , 1 , 0 );
+        registerCellData(CMAX , 1 , 0 );
+    }
 
-        PolymerBlackoilState(int number_of_cells, int number_of_faces, int num_phases);
-    };
 
 } // namespace Opm
 
 
 
 
-#endif // OPM_POLYMERBLACKOILSTATE_HEADER_INCLUDED
