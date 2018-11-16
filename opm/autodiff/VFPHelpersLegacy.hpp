@@ -75,7 +75,7 @@ inline void extendBlockPattern(const ADB& x, std::vector<int>& block_pattern) {
 }
 }
 
-#include "VFPHelpers.hpp"
+#include <opm/autodiff/VFPHelpers.hpp>
 
 
 namespace Opm {
