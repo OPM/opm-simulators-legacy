@@ -177,9 +177,6 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/autodiff/BlackoilModelParameters.hpp
   opm/autodiff/BlackoilPressureModel.hpp
   opm/autodiff/BlackoilPropsAdFromDeck.hpp
-  opm/autodiff/Compat.hpp
-  opm/autodiff/CPRPreconditioner.hpp
-  opm/autodiff/createGlobalCellArray.hpp
   opm/autodiff/DefaultBlackoilSolutionState.hpp
   opm/autodiff/BlackoilSequentialModel.hpp
   opm/autodiff/BlackoilReorderingTransportModel.hpp
@@ -187,17 +184,13 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/autodiff/fastSparseOperations.hpp
   opm/autodiff/DebugTimeReport.hpp
   opm/autodiff/DuneMatrix.hpp
-  opm/autodiff/ExtractParallelGridInformationToISTL.hpp
   opm/autodiff/FlowMain.hpp
-  opm/autodiff/FlowMainEbos.hpp
   opm/autodiff/FlowMainSequential.hpp
   opm/autodiff/GeoProps.hpp
   opm/autodiff/GridHelpers.hpp
   opm/autodiff/GridInit.hpp
   opm/autodiff/ImpesTPFAAD.hpp
   opm/autodiff/ISTLSolver.hpp
-  opm/autodiff/IterationReport.hpp
-  opm/autodiff/moduleVersion.hpp
   opm/autodiff/multiPhaseUpwind.hpp
   opm/autodiff/NewtonIterationBlackoilCPR.hpp
   opm/autodiff/NewtonIterationBlackoilInterface.hpp
@@ -206,43 +199,23 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/autodiff/NewtonIterationUtilities.hpp
   opm/autodiff/NonlinearSolver.hpp
   opm/autodiff/NonlinearSolver_impl.hpp
-  opm/autodiff/NonlinearSolverEbos.hpp
   opm/autodiff/LinearisedBlackoilResidual.hpp
   opm/autodiff/ParallelDebugOutput.hpp
-  opm/autodiff/ParallelOverlappingILU0.hpp
-  opm/autodiff/ParallelRestrictedAdditiveSchwarz.hpp
-  opm/autodiff/RateConverter.hpp
   opm/autodiff/RedistributeDataHandles.hpp
-  opm/autodiff/SimFIBODetails.hpp
   opm/autodiff/SimulatorBase.hpp
   opm/autodiff/SimulatorBase_impl.hpp
-  opm/autodiff/SimulatorFullyImplicitBlackoilEbos.hpp
   opm/autodiff/SimulatorFullyImplicitBlackoil.hpp
   opm/autodiff/SimulatorIncompTwophaseAd.hpp
   opm/autodiff/SimulatorSequentialBlackoil.hpp
   opm/autodiff/TransportSolverTwophaseAd.hpp
-  opm/autodiff/WellConnectionAuxiliaryModule.hpp
   opm/autodiff/WellDensitySegmented.hpp
-  opm/autodiff/WellStateFullyImplicitBlackoil.hpp
   opm/autodiff/SimulatorFullyImplicitBlackoilOutput.hpp
   opm/autodiff/ThreadHandle.hpp
-  opm/autodiff/VFPProperties.hpp
-  opm/autodiff/VFPHelpers.hpp
-  opm/autodiff/VFPProdProperties.hpp
-  opm/autodiff/VFPInjProperties.hpp
-  opm/autodiff/WellHelpers.hpp
+  opm/autodiff/VFPHelpersLegacy.hpp
+  opm/autodiff/VFPProdPropertiesLegacy.hpp
+  opm/autodiff/VFPInjPropertiesLegacy.hpp
   opm/autodiff/StandardWells.hpp
   opm/autodiff/StandardWells_impl.hpp
-  opm/autodiff/WellInterface.hpp
-  opm/autodiff/WellInterface_impl.hpp
-  opm/autodiff/StandardWell.hpp
-  opm/autodiff/StandardWell_impl.hpp
-  opm/autodiff/MultisegmentWell.hpp
-  opm/autodiff/MultisegmentWell_impl.hpp
-  opm/autodiff/MSWellHelpers.hpp
-  opm/autodiff/BlackoilWellModel.hpp
-  opm/autodiff/BlackoilWellModel_impl.hpp
-  opm/autodiff/MissingFeatures.hpp
   opm/core/flowdiagnostics/AnisotropicEikonal.hpp
   opm/core/flowdiagnostics/DGBasis.hpp
   opm/core/flowdiagnostics/FlowDiagnostics.hpp
@@ -253,7 +226,6 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/core/linalg/LinearSolverIstl.hpp
   opm/core/linalg/LinearSolverPetsc.hpp
   opm/core/linalg/LinearSolverUmfpack.hpp
-  opm/core/linalg/ParallelIstlInformation.hpp
   opm/core/linalg/call_umfpack.h
   opm/core/linalg/sparse_sys.h
   opm/core/pressure/CompressibleTpfa.hpp
@@ -268,17 +240,14 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/core/pressure/tpfa/compr_quant_general.h
   opm/core/pressure/tpfa/compr_source.h
   opm/core/pressure/tpfa/ifs_tpfa.h
-  opm/core/props/BlackoilPhases.hpp
   opm/core/props/BlackoilPropertiesBasic.hpp
   opm/core/props/BlackoilPropertiesFromDeck.hpp
-  opm/core/props/BlackoilPropertiesInterface.hpp
   opm/core/props/IncompPropertiesBasic.hpp
   opm/core/props/IncompPropertiesFromDeck.hpp
   opm/core/props/IncompPropertiesInterface.hpp
   opm/core/props/IncompPropertiesShadow.hpp
   opm/core/props/IncompPropertiesShadow_impl.hpp
   opm/core/props/IncompPropertiesSinglePhase.hpp
-  opm/core/props/phaseUsageFromDeck.hpp
   opm/core/props/pvt/PvtPropertiesBasic.hpp
   opm/core/props/pvt/PvtPropertiesIncompFromDeck.hpp
   opm/core/props/pvt/ThermalGasPvtWrapper.hpp
@@ -286,20 +255,13 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/core/props/pvt/ThermalWaterPvtWrapper.hpp
   opm/core/props/rock/RockBasic.hpp
   opm/core/props/rock/RockCompressibility.hpp
-  opm/core/props/rock/RockFromDeck.hpp
-  opm/core/props/satfunc/RelpermDiagnostics.hpp
   opm/core/props/satfunc/SaturationPropsBasic.hpp
   opm/core/props/satfunc/SaturationPropsFromDeck.hpp
   opm/core/props/satfunc/SaturationPropsInterface.hpp
-  opm/core/props/satfunc/RelpermDiagnostics_impl.hpp
-  opm/core/simulator/BlackoilState.hpp
-  opm/core/simulator/BlackoilStateToFluidState.hpp
   opm/core/simulator/EquilibrationHelpers.hpp
   opm/core/simulator/ExplicitArraysFluidState.hpp
   opm/core/simulator/ExplicitArraysSatDerivativesFluidState.hpp
-  opm/core/simulator/SimulatorReport.hpp
   opm/core/simulator/TwophaseState.hpp
-  opm/core/simulator/WellState.hpp
   opm/core/simulator/initState.hpp
   opm/core/simulator/initStateEquil.hpp
   opm/core/simulator/initStateEquil_impl.hpp
@@ -312,28 +274,16 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/core/transport/reorder/tarjan.h
   opm/core/utility/DataMap.hpp
   opm/core/utility/Event.hpp
-  opm/core/utility/Event_impl.hpp
-  opm/core/utility/initHydroCarbonState.hpp
   opm/core/utility/miscUtilities.hpp
   opm/core/utility/miscUtilitiesBlackoil.hpp
   opm/core/utility/miscUtilities_impl.hpp
   opm/core/utility/NullStream.hpp
   opm/core/utility/share_obj.hpp
-  opm/core/well_controls.h
-  opm/core/wells.h
-  opm/core/wells/InjectionSpecification.hpp
-  opm/core/wells/ProductionSpecification.hpp
-  opm/core/wells/WellCollection.hpp
-  opm/core/wells/WellsGroup.hpp
-  opm/core/wells/WellsManager.hpp
-  opm/core/wells/DynamicListEconLimited.hpp
-  opm/core/wells/WellsManager_impl.hpp
   opm/polymer/CompressibleTpfaPolymer.hpp
   opm/polymer/GravityColumnSolverPolymer.hpp
   opm/polymer/GravityColumnSolverPolymer_impl.hpp
   opm/polymer/IncompPropertiesDefaultPolymer.hpp
   opm/polymer/IncompTpfaPolymer.hpp
-  opm/polymer/PolymerBlackoilState.hpp
   opm/polymer/PolymerInflow.hpp
   opm/polymer/PolymerProperties.hpp
   opm/polymer/PolymerState.hpp
@@ -344,25 +294,10 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/polymer/TransportSolverTwophaseCompressiblePolymer.hpp
   opm/polymer/Point2D.hpp
   opm/polymer/TransportSolverTwophasePolymer.hpp
-  opm/simulators/flow_ebos_blackoil.hpp
-  opm/simulators/flow_ebos_gasoil.hpp
-  opm/simulators/flow_ebos_oilwater.hpp
-  opm/simulators/flow_ebos_polymer.hpp
-  opm/simulators/flow_ebos_solvent.hpp
-  opm/simulators/flow_ebos_energy.hpp
-  opm/simulators/flow_ebos_oilwater_polymer.hpp
   opm/simulators/ensureDirectoryExists.hpp
-  opm/simulators/ParallelFileMerger.hpp
   opm/simulators/SimulatorCompressibleTwophase.hpp
   opm/simulators/thresholdPressures.hpp
-  opm/simulators/WellSwitchingLogger.hpp
   opm/simulators/vtk/writeVtkData.hpp
-  opm/simulators/timestepping/AdaptiveSimulatorTimer.hpp
   opm/simulators/timestepping/AdaptiveTimeStepping.hpp
   opm/simulators/timestepping/AdaptiveTimeStepping_impl.hpp
-  opm/simulators/timestepping/AdaptiveTimeSteppingEbos.hpp
-  opm/simulators/timestepping/TimeStepControl.hpp
-  opm/simulators/timestepping/TimeStepControlInterface.hpp
-  opm/simulators/timestepping/SimulatorTimer.hpp
-  opm/simulators/timestepping/SimulatorTimerInterface.hpp
   )
