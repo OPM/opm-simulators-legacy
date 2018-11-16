@@ -22,27 +22,13 @@ BASE_NAME=`basename ${TEST_ARGS}_RESTART.DATA`
 rm -Rf ${RESULT_PATH}
 mkdir -p ${RESULT_PATH}
 cd ${RESULT_PATH}
-if test $PARALLEL -eq 1
-then
-  CMD_PREFIX="mpirun -np 4 "
-else
-  CMD_PREFIX=""
-fi
-if test "${EXE_NAME}" = "flow"; then
-    ${CMD_PREFIX} ${BINPATH}/${EXE_NAME} ${TEST_ARGS}.DATA --enable-adaptive-time-stepping=false --enable-opm-rst-file=true --output-dir=${RESULT_PATH}
-else
-    ${CMD_PREFIX} ${BINPATH}/${EXE_NAME} ${TEST_ARGS}.DATA enable-opm-rst-file=true timestep.adaptive=false output_dir=${RESULT_PATH}
-fi
+${BINPATH}/${EXE_NAME} ${TEST_ARGS}.DATA enable-opm-rst-file=true timestep.adaptive=false output_dir=${RESULT_PATH}
 
 test $? -eq 0 || exit 1
 
 ${OPM_PACK_COMMAND} -o ${BASE_NAME} ${TEST_ARGS}_RESTART.DATA
 
-if test "${EXE_NAME}" = "flow"; then
-    ${CMD_PREFIX} ${BINPATH}/${EXE_NAME} ${BASE_NAME} --enable-adaptive-time-stepping=false --enable-opm-rst-file=true --output-dir=${RESULT_PATH}
-else
-    ${CMD_PREFIX} ${BINPATH}/${EXE_NAME} ${BASE_NAME} enable-opm-rst-file=true timestep.adaptive=false output_dir=${RESULT_PATH}
-fi
+${CMD_PREFIX} ${BINPATH}/${EXE_NAME} ${BASE_NAME} enable-opm-rst-file=true timestep.adaptive=false output_dir=${RESULT_PATH}
 test $? -eq 0 || exit 1
 
 ecode=0
