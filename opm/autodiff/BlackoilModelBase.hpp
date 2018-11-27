@@ -34,7 +34,7 @@
 #include <opm/autodiff/VFPInjPropertiesLegacy.hpp>
 #include <opm/autodiff/VFPProdPropertiesLegacy.hpp>
 #include <opm/autodiff/VFPProperties.hpp>
-#include <opm/autodiff/RateConverter.hpp>
+#include <opm/autodiff/RateConverterLegacy.hpp>
 #include <opm/autodiff/IterationReport.hpp>
 #include <opm/autodiff/DefaultBlackoilSolutionState.hpp>
 #include <opm/parser/eclipse/EclipseState/Grid/NNC.hpp>
