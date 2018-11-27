@@ -32,7 +32,7 @@
 #include <opm/autodiff/BlackoilModel.hpp>
 #include <opm/autodiff/BlackoilPropsAdFromDeck.hpp>
 #include <opm/autodiff/WellStateFullyImplicitBlackoil.hpp>
-#include <opm/autodiff/RateConverter.hpp>
+#include <opm/autodiff/RateConverterLegacy.hpp>
 
 #include <opm/grid/UnstructuredGrid.h>
 #include <opm/core/wells.h>

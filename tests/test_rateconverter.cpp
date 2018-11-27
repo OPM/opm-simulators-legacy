@@ -22,7 +22,7 @@
 
 #define BOOST_TEST_MODULE VoidageRateConversionTest
 
-#include <opm/autodiff/RateConverter.hpp>
+#include <opm/autodiff/RateConverterLegacy.hpp>
 
 #include <opm/autodiff/BlackoilPropsAdFromDeck.hpp>
 
