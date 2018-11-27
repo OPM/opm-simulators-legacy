@@ -25,6 +25,7 @@
 list (APPEND MAIN_SOURCE_FILES
   opm/autodiff/BlackoilModelParameters.cpp
   opm/autodiff/BlackoilPropsAdFromDeck.cpp
+  opm/autodiff/Compat.cpp
   opm/autodiff/GridHelpers.cpp
   opm/autodiff/ImpesTPFAAD.cpp
   opm/autodiff/LinearisedBlackoilResidual.cpp
@@ -70,6 +71,7 @@ list (APPEND MAIN_SOURCE_FILES
   opm/core/props/rock/RockBasic.cpp
   opm/core/props/rock/RockCompressibility.cpp
   opm/core/props/satfunc/SaturationPropsBasic.cpp
+  opm/core/simulator/BlackoilState.cpp
   opm/core/simulator/TwophaseState.cpp
   opm/core/transport/TransportSolverTwophaseInterface.cpp
   opm/core/transport/reorder/ReorderSolverInterface.cpp
@@ -80,6 +82,7 @@ list (APPEND MAIN_SOURCE_FILES
   opm/core/utility/miscUtilities.cpp
   opm/core/utility/miscUtilitiesBlackoil.cpp
   opm/core/utility/NullStream.cpp
+  opm/polymer/PolymerBlackoilState.cpp
   opm/polymer/PolymerState.cpp
   opm/polymer/CompressibleTpfaPolymer.cpp
   opm/polymer/IncompTpfaPolymer.cpp
@@ -114,6 +117,7 @@ list (APPEND TEST_SOURCE_FILES
   tests/test_linearsolver.cpp
   tests/test_satfunc.cpp
   tests/test_anisotropiceikonal.cpp
+  tests/test_blackoilstate.cpp
 )
 
 if(MPI_FOUND)
@@ -127,6 +131,8 @@ list (APPEND TEST_DATA_FILES
   tests/satfuncEPS_A.DATA
   tests/satfuncEPS_C.DATA
   tests/satfuncEPS_D.DATA
+  tests/testBlackoilState1.DATA
+  tests/testBlackoilState2.DATA
 )
 
 
@@ -181,9 +187,10 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/autodiff/BlackoilSequentialModel.hpp
   opm/autodiff/BlackoilReorderingTransportModel.hpp
   opm/autodiff/BlackoilTransportModel.hpp
-  opm/autodiff/fastSparseOperations.hpp
+  opm/autodiff/Compat.hpp
   opm/autodiff/DebugTimeReport.hpp
   opm/autodiff/DuneMatrix.hpp
+  opm/autodiff/fastSparseOperations.hpp
   opm/autodiff/FlowMain.hpp
   opm/autodiff/FlowMainSequential.hpp
   opm/autodiff/GeoProps.hpp
@@ -201,6 +208,7 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/autodiff/NonlinearSolver_impl.hpp
   opm/autodiff/LinearisedBlackoilResidual.hpp
   opm/autodiff/ParallelDebugOutput.hpp
+  opm/autodiff/RateConverterLegacy.hpp
   opm/autodiff/RedistributeDataHandles.hpp
   opm/autodiff/SimulatorBase.hpp
   opm/autodiff/SimulatorBase_impl.hpp
@@ -242,6 +250,7 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/core/pressure/tpfa/ifs_tpfa.h
   opm/core/props/BlackoilPropertiesBasic.hpp
   opm/core/props/BlackoilPropertiesFromDeck.hpp
+  opm/core/props/BlackoilPropertiesInterface.hpp
   opm/core/props/IncompPropertiesBasic.hpp
   opm/core/props/IncompPropertiesFromDeck.hpp
   opm/core/props/IncompPropertiesInterface.hpp
@@ -258,6 +267,8 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/core/props/satfunc/SaturationPropsBasic.hpp
   opm/core/props/satfunc/SaturationPropsFromDeck.hpp
   opm/core/props/satfunc/SaturationPropsInterface.hpp
+  opm/core/simulator/BlackoilState.hpp
+  opm/core/simulator/BlackoilStateToFluidState.hpp
   opm/core/simulator/EquilibrationHelpers.hpp
   opm/core/simulator/ExplicitArraysFluidState.hpp
   opm/core/simulator/ExplicitArraysSatDerivativesFluidState.hpp
@@ -274,6 +285,7 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/core/transport/reorder/tarjan.h
   opm/core/utility/DataMap.hpp
   opm/core/utility/Event.hpp
+  opm/core/utility/initHydroCarbonState.hpp
   opm/core/utility/miscUtilities.hpp
   opm/core/utility/miscUtilitiesBlackoil.hpp
   opm/core/utility/miscUtilities_impl.hpp
@@ -284,6 +296,7 @@ list (APPEND PUBLIC_HEADER_FILES
   opm/polymer/GravityColumnSolverPolymer_impl.hpp
   opm/polymer/IncompPropertiesDefaultPolymer.hpp
   opm/polymer/IncompTpfaPolymer.hpp
+  opm/polymer/PolymerBlackoilState.hpp
   opm/polymer/PolymerInflow.hpp
   opm/polymer/PolymerProperties.hpp
   opm/polymer/PolymerState.hpp
