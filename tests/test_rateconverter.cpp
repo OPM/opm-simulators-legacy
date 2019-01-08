@@ -44,7 +44,7 @@
 struct SetupSimple {
     SetupSimple() :
         deck( Opm::Parser{}.parseFile( "fluid.data" ) ),
-        eclState( deck, Opm::ParseContext() )
+        eclState( deck )
     {
         param.disableOutput();
         param.insertParameter("init_rock"       , "false" );

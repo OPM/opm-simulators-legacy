@@ -112,15 +112,17 @@ try
     if (use_deck) {
         Parser parser;
         ParseContext parseContext;
+        ErrorGuard errors;
         parseContext.update(ParseContext::PARSE_MISSING_DIMS_KEYWORD, InputError::WARN);
         std::string deck_filename = param.get<std::string>("deck_filename");
-        auto deck = parser.parseFile(deck_filename, parseContext);
-        eclipseState.reset(new EclipseState(deck, parseContext));
+        auto deck = parser.parseFile(deck_filename, parseContext, errors);
+        eclipseState.reset(new EclipseState(deck, parseContext, errors));
         schedule.reset( new Schedule(deck,
                                      eclipseState->getInputGrid(),
                                      eclipseState->get3DProperties(),
                                      eclipseState->runspec(),
-                                     parseContext));
+                                     parseContext,
+                                     errors));
 
         // Grid init
         grid.reset(new GridManager(eclipseState->getInputGrid()));

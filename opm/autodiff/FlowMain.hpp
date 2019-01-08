@@ -495,7 +495,8 @@ namespace Opm
                                             { ParseContext::PARSE_MISSING_DIMS_KEYWORD, InputError::WARN   },
                                             { ParseContext::SUMMARY_UNKNOWN_WELL,       InputError::WARN   },
                                             { ParseContext::SUMMARY_UNKNOWN_GROUP,      InputError::WARN   }});
-                deck_ = std::make_shared< Deck >( parser.parseFile(deck_filename, parseContext) );
+                ErrorGuard errors;
+                deck_ = std::make_shared< Deck >( parser.parseFile(deck_filename, parseContext, errors) );
                 checkDeck(*deck_, parser);
 
                 if ( output_cout_)
@@ -503,16 +504,18 @@ namespace Opm
                     MissingFeatures::checkKeywords(*deck_);
                 }
 
-                eclipse_state_.reset(new EclipseState(*deck_, parseContext));
+                eclipse_state_.reset(new EclipseState(*deck_, parseContext, errors));
                 schedule_.reset(new Schedule(*deck_,
                                              eclipse_state_->getInputGrid(),
                                              eclipse_state_->get3DProperties(),
                                              eclipse_state_->runspec(),
-                                             parseContext));
+                                             parseContext,
+                                             errors));
                 summary_config_.reset(new SummaryConfig(*deck_,
                                                         *schedule_,
                                                         eclipse_state_->getTableManager(),
-                                                        parseContext));
+                                                        parseContext,
+                                                        errors));
             }
             catch (const std::invalid_argument& e) {
                 std::cerr << "Failed to create valid EclipseState object. See logfile: " << logFile_ << std::endl;

@@ -177,14 +177,6 @@ namespace Opm
         void
         outputFluidInPlace(const std::vector<double>& oip, const std::vector<double>& cip, const UnitSystem& units, const int reg);
 
-
-        void updateListEconLimited(const std::unique_ptr<Solver>& solver,
-                                   const Schedule& schedule,
-                                   const int current_step,
-                                   const Wells* wells,
-                                   const WellState& well_state,
-                                   DynamicListEconLimited& list_econ_limited) const;
-
         void initHysteresisParams(ReservoirState& state);
 
         // Data.

@@ -63,8 +63,9 @@ BOOST_AUTO_TEST_CASE (GwsegStandard)
     const UnstructuredGrid& grid = *(gm.c_grid());
     Opm::ParseContext parseContext;
     Opm::Parser parser;
-    Opm::Deck deck = parser.parseFile("satfuncStandard.DATA", parseContext);
-    Opm::EclipseState eclipseState(deck , parseContext);
+    Opm::ErrorGuard errors;
+    Opm::Deck deck = parser.parseFile("satfuncStandard.DATA", parseContext, errors);
+    Opm::EclipseState eclipseState(deck , parseContext, errors);
     Opm::BlackoilPropertiesFromDeck props(deck, eclipseState, grid, param, false);
     
     const int np = 3;
@@ -149,8 +150,9 @@ BOOST_AUTO_TEST_CASE (GwsegEPSBase)
     const UnstructuredGrid& grid = *(gm.c_grid());
     Opm::ParseContext parseContext;
     Opm::Parser parser;
-    Opm::Deck deck = parser.parseFile("satfuncEPSBase.DATA" , parseContext);
-    Opm::EclipseState eclipseState(deck , parseContext);
+    Opm::ErrorGuard errors;
+    Opm::Deck deck = parser.parseFile("satfuncEPSBase.DATA" , parseContext, errors);
+    Opm::EclipseState eclipseState(deck , parseContext, errors);
     Opm::BlackoilPropertiesFromDeck props(deck, eclipseState, grid, param, false);
     
     const int np = 3;
@@ -235,8 +237,9 @@ BOOST_AUTO_TEST_CASE (GwsegEPS_A)
     const UnstructuredGrid& grid = *(gm.c_grid());
     Opm::ParseContext parseContext;
     Opm::Parser parser;
-    Opm::Deck deck = parser.parseFile("satfuncEPS_A.DATA" , parseContext);
-    Opm::EclipseState eclipseState(deck , parseContext);
+    Opm::ErrorGuard errors;
+    Opm::Deck deck = parser.parseFile("satfuncEPS_A.DATA" , parseContext, errors);
+    Opm::EclipseState eclipseState(deck , parseContext, errors);
     Opm::BlackoilPropertiesFromDeck props(deck, eclipseState, grid, param, false);
     
     const int np = 3;
@@ -487,8 +490,9 @@ BOOST_AUTO_TEST_CASE (GwsegEPS_C)
     const UnstructuredGrid& grid = *(gm.c_grid());
     Opm::ParseContext parseContext;
     Opm::Parser parser;
-    Opm::Deck deck = parser.parseFile("satfuncEPS_C.DATA", parseContext);
-    Opm::EclipseState eclipseState(deck , parseContext);
+    Opm::ErrorGuard errors;
+    Opm::Deck deck = parser.parseFile("satfuncEPS_C.DATA", parseContext, errors);
+    Opm::EclipseState eclipseState(deck , parseContext, errors);
     Opm::BlackoilPropertiesFromDeck props(deck, eclipseState, grid, param, false);
     
     const int np = 3;
@@ -590,8 +594,9 @@ BOOST_AUTO_TEST_CASE (GwsegEPS_D)
     const UnstructuredGrid& grid = *(gm.c_grid());
     Opm::ParseContext parseContext;
     Opm::Parser parser;
-    Opm::Deck deck = parser.parseFile("satfuncEPS_D.DATA" , parseContext);
-    Opm::EclipseState eclipseState(deck , parseContext);
+    Opm::ErrorGuard errors;
+    Opm::Deck deck = parser.parseFile("satfuncEPS_D.DATA" , parseContext, errors);
+    Opm::EclipseState eclipseState(deck , parseContext, errors);
     Opm::BlackoilPropertiesFromDeck props(deck, eclipseState, grid, param, false);
     
     const int np = 3;

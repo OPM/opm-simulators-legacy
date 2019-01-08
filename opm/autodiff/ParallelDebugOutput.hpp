@@ -32,7 +32,6 @@
 #include <opm/autodiff/WellStateFullyImplicitBlackoil.hpp>
 #include <opm/output/eclipse/RestartValue.hpp>
 #include <opm/autodiff/Compat.hpp>
-#include <opm/core/wells/DynamicListEconLimited.hpp>
 
 #if HAVE_OPM_GRID
 #include <opm/grid/common/p2pcommunicator.hh>
@@ -605,10 +604,6 @@ namespace Opm
             if( isIORank() )
             {
                 Dune::CpGrid& globalGrid = *grid_;
-                // TODO: make a dummy DynamicListEconLimited here for NOW for compilation and development
-                // TODO: NOT SURE whether it will cause problem for parallel running
-                // TODO: TO BE TESTED AND IMPROVED
-                const DynamicListEconLimited dynamic_list_econ_limited;
                 // Create wells and well state.
                 WellsManager wells_manager(eclipseState_,
                                            schedule_,
@@ -619,7 +614,6 @@ namespace Opm
                                            Opm::UgGridHelpers::dimensions( globalGrid ),
                                            Opm::UgGridHelpers::cell2Faces( globalGrid ),
                                            Opm::UgGridHelpers::beginFaceCentroids( globalGrid ),
-                                           dynamic_list_econ_limited,
                                            false,
                                            // We need to pass the optionaly arguments
                                            // as we get the following error otherwise

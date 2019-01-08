@@ -26,7 +26,6 @@
 #include <opm/parser/eclipse/EclipseState/Schedule/Events.hpp>
 #include <opm/core/utility/initHydroCarbonState.hpp>
 #include <opm/core/well_controls.h>
-#include <opm/core/wells/DynamicListEconLimited.hpp>
 #include <opm/autodiff/BlackoilModel.hpp>
 
 namespace Opm
@@ -132,7 +131,6 @@ namespace Opm
             }
         }
 
-        DynamicListEconLimited dynamic_list_econ_limited;
         SimulatorReport report;
         SimulatorReport stepReport;
 
@@ -169,7 +167,6 @@ namespace Opm
                                        Opm::UgGridHelpers::dimensions(grid_),
                                        Opm::UgGridHelpers::cell2Faces(grid_),
                                        Opm::UgGridHelpers::beginFaceCentroids(grid_),
-                                       dynamic_list_econ_limited,
                                        is_parallel_run_,
                                        defunct_well_names_);
             const Wells* wells = wells_manager.c_wells();
@@ -317,9 +314,6 @@ namespace Opm
             report.output_write_time += perfTimer.stop();
 
             prev_well_state = well_state;
-
-            asImpl().updateListEconLimited(solver, *schedule_, timer.currentStepNum(), wells,
-                                           well_state, dynamic_list_econ_limited);
         }
 
         // Stop timer and create timing report
@@ -807,21 +801,6 @@ namespace Opm
         OpmLog::note(ss.str());
     }
 
-
-    template <class Implementation>
-    void
-    SimulatorBase<Implementation>::
-    updateListEconLimited(const std::unique_ptr<Solver>& solver,
-                          const Schedule& schedule,
-                          const int current_step,
-                          const Wells* wells,
-                          const WellState& well_state,
-                          DynamicListEconLimited& list_econ_limited) const
-    {
-
-        solver->model().wellModel().updateListEconLimited(schedule, current_step, wells,
-                                                          well_state, list_econ_limited);
-    }
 
     template <class Implementation>
     void

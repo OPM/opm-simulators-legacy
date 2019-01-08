@@ -105,10 +105,11 @@ try
         std::string deck_filename = param.get<std::string>("deck_filename");
         Opm::ParseContext parseContext({{ ParseContext::PARSE_RANDOM_SLASH , InputError::IGNORE }});
         Parser parser;
-        deck.reset(new Deck(parser.parseFile(deck_filename , parseContext)));
+        ErrorGuard errors;
+        deck.reset(new Deck(parser.parseFile(deck_filename , parseContext, errors)));
 
-        eclipseState.reset(new Opm::EclipseState(*deck , parseContext));
-        schedule.reset( new Opm::Schedule(*deck, eclipseState->getInputGrid(), eclipseState->get3DProperties(), eclipseState->runspec(), parseContext));
+        eclipseState.reset(new Opm::EclipseState(*deck , parseContext, errors));
+        schedule.reset( new Opm::Schedule(*deck, eclipseState->getInputGrid(), eclipseState->get3DProperties(), eclipseState->runspec(), parseContext, errors));
         // Grid init
         grid.reset(new GridManager(eclipseState->getInputGrid()));
         {

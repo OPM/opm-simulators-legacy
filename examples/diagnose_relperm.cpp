@@ -74,8 +74,9 @@ try
                               { ParseContext::UNSUPPORTED_INITIAL_THPRES, InputError::IGNORE},
                               { ParseContext::INTERNAL_ERROR_UNINITIALIZED_THPRES, InputError::IGNORE}
                              });
-    Opm::Deck deck = parser.parseFile(eclipseFilename, parseContext);
-    Opm::EclipseState eclState( deck, parseContext );
+    ErrorGuard errors;
+    Opm::Deck deck = parser.parseFile(eclipseFilename, parseContext, errors);
+    Opm::EclipseState eclState( deck, parseContext, errors );
 
     GridManager gm(eclState.getInputGrid());
     const UnstructuredGrid& grid = *gm.c_grid();

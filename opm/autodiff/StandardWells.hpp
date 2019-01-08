@@ -37,7 +37,6 @@
 #include <opm/parser/eclipse/EclipseState/Schedule/Schedule.hpp>
 
 #include <opm/core/wells.h>
-#include <opm/core/wells/DynamicListEconLimited.hpp>
 #include <opm/core/wells/WellCollection.hpp>
 #include <opm/autodiff/AutoDiffBlock.hpp>
 #include <opm/autodiff/AutoDiffHelpers.hpp>
@@ -182,16 +181,6 @@ namespace Opm {
             /// unless setStoreWellPerforationFluxesFlag(true) has been
             /// called.
             const Vector& getStoredWellPerforationFluxes() const;
-
-            /// upate the dynamic lists related to economic limits
-            template<class WellState>
-            void
-            updateListEconLimited(const Schedule& schedule,
-                                  const int current_step,
-                                  const Wells* wells,
-                                  const WellState& well_state,
-                                  DynamicListEconLimited& list_econ_limited) const;
-
 
             WellCollection* wellCollection() const;
 

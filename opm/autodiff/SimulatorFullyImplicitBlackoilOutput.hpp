@@ -28,7 +28,6 @@
 #include <opm/common/OpmLog/OpmLog.hpp>
 #include <opm/core/utility/miscUtilities.hpp>
 #include <opm/common/utility/parameters/ParameterGroup.hpp>
-#include <opm/core/wells/DynamicListEconLimited.hpp>
 #include <opm/core/simulator/BlackoilState.hpp>
 #include <opm/core/simulator/SimulatorReport.hpp>
 
@@ -435,8 +434,6 @@ namespace Opm
             }
         }
 
-        // gives a dummy dynamic_list_econ_limited
-        DynamicListEconLimited dummy_list_econ_limited;
         WellsManager wellsmanager(eclipseState_,
                                   schedule_,
                                   // The restart step value is used to identify wells present at the given time step.
@@ -450,12 +447,11 @@ namespace Opm
                                   Opm::UgGridHelpers::dimensions(grid),
                                   Opm::UgGridHelpers::cell2Faces(grid),
                                   Opm::UgGridHelpers::beginFaceCentroids(grid),
-                                  dummy_list_econ_limited
                                   // We need to pass the optionaly arguments
                                   // as we get the following error otherwise
                                   // with c++ (Debian 4.9.2-10) 4.9.2 and -std=c++11
                                   // converting to ‘const std::unordered_set<std::basic_string<char> >’ from initializer list would use explicit constructo
-                                  , false,
+                                  false,
                                   std::unordered_set<std::string>());
 
         const Wells* wells = wellsmanager.c_wells();
