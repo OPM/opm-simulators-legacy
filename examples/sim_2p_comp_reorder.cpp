@@ -102,15 +102,13 @@ try
     // int max_well_control_iterations = 0;
     double gravity[3] = { 0.0 };
     if (use_deck) {
-        ParseContext parseContext;
         std::string deck_filename = param.get<std::string>("deck_filename");
-        auto deck = parser.parseFile(deck_filename , parseContext);
-        eclipseState.reset(new EclipseState(deck, parseContext));
+        auto deck = parser.parseFile(deck_filename);
+        eclipseState.reset(new EclipseState(deck));
         schedule.reset( new Schedule(deck,
                                      eclipseState->getInputGrid(),
                                      eclipseState->get3DProperties(),
-                                     eclipseState->runspec(),
-                                     parseContext));
+                                     eclipseState->runspec()));
 
 
         // Grid init

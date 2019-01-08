@@ -116,10 +116,9 @@ try
     ParameterGroup param(argc, argv);
     std::cout << "---------------    Reading parameters     ---------------" << std::endl;
     const std::string deck_filename = param.get<std::string>("deck_filename");
-    Opm::ParseContext parseContext;
     Opm::Parser parser;
-    const Opm::Deck& deck = parser.parseFile(deck_filename , parseContext);
-    const Opm::EclipseState eclipseState(deck, parseContext);
+    const Opm::Deck& deck = parser.parseFile(deck_filename);
+    const Opm::EclipseState eclipseState(deck);
     const double grav = param.getDefault("gravity", unit::gravity);
     GridManager gm(eclipseState.getInputGrid());
     const UnstructuredGrid& grid = *gm.c_grid();

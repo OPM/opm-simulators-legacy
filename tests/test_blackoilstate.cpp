@@ -37,12 +37,13 @@ BOOST_AUTO_TEST_CASE(EqualsDifferentDeckReturnFalse) {
     const string filename1 = "testBlackoilState1.DATA";
     const string filename2 = "testBlackoilState2.DATA";
 
-    const auto es1 = Opm::Parser::parse(filename1);
+    ErrorGuard errors;
+    const auto es1 = Opm::Parser::parse(filename1, ParseContext(), errors);
     auto eg1 = es1.getInputGrid();
     std::vector<int> actnum = get_testBlackoilStateActnum();
     eg1.resetACTNUM(actnum.data());
 
-    const auto es2 = Opm::Parser::parse(filename2);
+    const auto es2 = Opm::Parser::parse(filename2, ParseContext(), errors);
     const auto& eg2 = es2.getInputGrid();
 
     GridManager vanguard1(eg1);
@@ -64,7 +65,8 @@ BOOST_AUTO_TEST_CASE(EqualsNumericalDifferenceReturnFalse) {
 
     const string filename = "testBlackoilState1.DATA";
 
-    const auto es = Opm::Parser::parse(filename);
+    ErrorGuard errors;
+    const auto es = Opm::Parser::parse(filename, ParseContext(), errors);
     auto eg = es.getInputGrid();
 
     std::vector<int> actnum = get_testBlackoilStateActnum();
