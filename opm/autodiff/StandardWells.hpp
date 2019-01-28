@@ -41,7 +41,7 @@
 #include <opm/autodiff/AutoDiffBlock.hpp>
 #include <opm/autodiff/AutoDiffHelpers.hpp>
 #include <opm/autodiff/BlackoilPropsAdFromDeck.hpp>
-#include <opm/simulators/WellSwitchingLogger.hpp>
+#include <opm/simulators/DeferredLogger.hpp>
 
 namespace Opm {
 
@@ -281,6 +281,7 @@ namespace Opm {
                                            const int well_index,
                                            WellState& xw) const;
 
+            const std::string modestring[4] = { "BHP", "THP", "RESERVOIR_RATE", "SURFACE_RATE" };
         };
 
 
