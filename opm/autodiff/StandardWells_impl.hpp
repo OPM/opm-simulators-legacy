@@ -711,7 +711,7 @@ namespace Opm
     StandardWells::
     updateWellControls(WellState& xw) const
     {
-        wellhelpers::WellSwitchingLogger logger;
+        DeferredLogger logger;
 
         if( !localWellsActive() ) return ;
 
@@ -756,15 +756,17 @@ namespace Opm
                     }
                 }
 
-
                 if (ctrl_index != nwc) {
                     // Constraint number ctrl_index was broken, switch to it.
                     // We disregard terminal_ouput here as with it only messages
                     // for wells on one process will be printed.
-                    logger.wellSwitched(wells().name[w],
-                                        well_controls_iget_type(wc, current),
-                                        well_controls_iget_type(wc, ctrl_index));
-
+                    auto from = well_controls_iget_type(wc, current);
+                    auto to  = well_controls_iget_type(wc, ctrl_index);
+                    std::ostringstream ss;
+                    ss << "    Switching control mode for well " << wells().name[w]
+                       << " from " << modestring[from]
+                       << " to " <<  modestring[to];
+                    logger.info(ss.str());
                     xw.currentControls()[w] = ctrl_index;
                     current = xw.currentControls()[w];
                     constraint_violated = true;
@@ -795,7 +797,7 @@ namespace Opm
                 }
             }
         }
-
+        logger.logMessages();
     }
 
 
